@@ -1,28 +1,12 @@
-<!doctype html>
-<html lang="en">
-  <head><meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
-    <!-- Required meta tags -->
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php
+include "includes/header.inc.php";
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <title>Fed Legal Cost Estimator</title>
-    
-    <style>
-      .center_div{
-    margin: 0 auto;
-    width:95% /* value of your choice which suits your alignment */
-}
-    </style>
-  </head>
-  <body>
+?>
 
 <div class="container center_div">
     <div class="row">
     <div class="col-md-12">
-      <h2><center>JDM Importer Cost Estimator</center></h2>
+      <h2><center><?=$title?></center></h2>
       <h3><center>Total Fees</center></h3>
     </div>
   </div>
@@ -30,7 +14,7 @@
 		<div class="col-md-12">
 			
             <?php
-include "config.inc.php";
+
 
 
 // Get Vehicle Price & convert
