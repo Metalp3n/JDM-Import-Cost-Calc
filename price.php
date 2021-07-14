@@ -3,22 +3,29 @@ include "includes/header.inc.php";
 
 ?>
 
-<div class="container center_div">
-    <div class="row">
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">Total Cost Breakdown</h1>
+                            
+                           
+                            <div class="container totalCost">
+  <div class="row">
     <div class="col-md-12">
-      <h2><center><?=$title?></center></h2>
-      <h3><center>Total Fees</center></h3>
-    </div>
-  </div>
-	<div class="row">
-		<div class="col-md-12">
-			
+      
             <?php
 
 
 
-// Get Vehicle Price & convert
+// Get Submitted Variables
 $vehiclePriceB3YEN = $_POST["vehiclePriceB3"];
+$vehicleType = $_POST["vehicleType"];
+$portofEntry = $_POST["portEntry"];
+
+// Get Vehicle Price & convert
 $vehiclePriceB3USD =  convertCurrency($vehiclePriceB3YEN, 'JPY', 'USD');
 //...
 //..
@@ -49,7 +56,7 @@ $usTitleUSD = "275";
 $usTitleYEN = convertCurrency($usTitleUSD, 'USD', 'JPY');
 //Customs Filing Formmula
 $customsFilingUSD = $inlandTransportUSD + $preshipmentWashUSD + $roroShippingUSD + $vehiclePriceB3USD + $auctionFeesUSD;
-$vehicleType = $_POST["vehicleType"];
+
 if ($vehicleType == "Truck") {
   $customsFilingUSD = $customsFilingUSD * .254714;
 } else {
@@ -64,7 +71,6 @@ $customsDutyYEN = convertCurrency($customsDutyUSD, 'USD', 'JPY');
 //...
 //..
 //.
-$portofEntry = $_POST["portEntry"];
 if ($portofEntry == "Savannah") {
   $steamshipChargeUSD = "57.23";
 } elseif ($portofEntry == "Newark") {
@@ -103,16 +109,27 @@ $totalYEN = convertCurrency($total, 'USD', 'JPY');
 //..
 //.
 $vehiclePriceB3USD = money_format('$%i', $vehiclePriceB3USD);
+$vehiclePriceB3YEN = money_format('¥%i', $vehiclePriceB3YEN);
 $auctionFeesUSD = money_format('$%i', $auctionFeesUSD);
+$auctionFeesYEN = money_format('¥%i', $auctionFeesYEN);
 $inlandTransportUSD = money_format('$%i', $inlandTransportUSD);
+$inlandTransportYEN = money_format('¥%i', $inlandTransportYEN);
 $preshipmentWashUSD = money_format('$%i', $preshipmentWashUSD);
+$preshipmentWashYEN = money_format('¥%i', $preshipmentWashYEN);
 $roroShippingUSD = money_format('$%i', $roroShippingUSD);
+$roroShippingYEN = money_format('¥%i', $roroShippingYEN);
 $customsFilingUSD = money_format('$%i', $customsFilingUSD);
+$customsFilingYEN = money_format('¥%i', $customsFilingYEN);
 $customsDutyUSD = money_format('$%i', $customsDutyUSD);
+$customsDutyYEN = money_format('¥%i', $customsDutyYEN);
 $portChargeUSD = money_format('$%i', $portChargeUSD);
+$portChargeYEN = money_format('¥%i', $portChargeYEN);
 $steamshipChargeUSD = money_format('$%i', $steamshipChargeUSD);
+$steamshipChargeYEN = money_format('¥%i', $steamshipChargeYEN);
 $usTitleUSD = money_format('$%i', $usTitleUSD);
+$usTitleYEN = money_format('¥%i', $usTitleYEN);
 $jdmImporterUSD = money_format('$%i', $jdmImporterUSD);
+$jdmImporterYEN = money_format('¥%i', $jdmImporterYEN);
 $total = money_format('$%i', $total);
 $totalYEN = money_format('¥%i', $totalYEN);
 
@@ -123,7 +140,7 @@ $totalYEN = money_format('¥%i', $totalYEN);
 //.
 ?>
 
-<table class="table table-sm">
+<table class="table table-hover">
 <tbody>
   <tr>
     <td>Winning Bid:</td>
@@ -151,7 +168,7 @@ $totalYEN = money_format('¥%i', $totalYEN);
     <td><?=$roroShippingUSD?> <span class="badge badge-pill badge-success">USD</span></td>
   </tr>
   <tr>
-    <td>Customs Filing:</td>
+    <td>Customs Filing for a <?=$vehicleType?>:</td>
     <td><?=$customsFilingYEN?> <span class="badge badge-pill badge-warning">JPY</span></td>
     <td><?=$customsFilingUSD?> <span class="badge badge-pill badge-success">USD</span></td>
   </tr>
@@ -161,7 +178,7 @@ $totalYEN = money_format('¥%i', $totalYEN);
     <td><?=$customsDutyUSD?> <span class="badge badge-pill badge-success">USD</span></td>
   </tr>
   <tr>
-    <td>Port Charge:</td>
+    <td>Port Charge for <?=$portofEntry?>:</td>
     <td><?=$portChargeYEN?> <span class="badge badge-pill badge-warning">JPY</span></td>
     <td><?=$portChargeUSD?> <span class="badge badge-pill badge-success">USD</span></td>
   </tr>
@@ -180,10 +197,10 @@ $totalYEN = money_format('¥%i', $totalYEN);
     <td><?=$jdmImporterYEN?> <span class="badge badge-pill badge-warning">JPY</span></td>
     <td><?=$jdmImporterUSD?> <span class="badge badge-pill badge-success">USD</span></td>
   </tr>
-   <tr class="success">
-    <td>Total:</td>
-    <td><?=$totalYEN?> <span class="badge badge-pill badge-warning">JPY</span></td>
-    <td><?=$total?> <span class="badge badge-pill badge-success">USD</span></td>
+   <tr class="thead-dark">
+    <th>Total:</th>
+    <th><?=$totalYEN?> <span class="badge badge-pill badge-warning">JPY</span></th>
+    <th><?=$total?> <span class="badge badge-pill badge-success">USD</span></th>
   </tr>
 </tbody>
 </table>
@@ -206,14 +223,90 @@ $totalYEN = money_format('¥%i', $totalYEN);
 //echo "<br><br>";
 ?>
 
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
-</html>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+<!-- Icons Grid-->
+        <section class="features-icons bg-light text-center">
+            <div class="container">
+              <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <h2 class="mb-4">Ready To Get Started?</h2>
+                    </div>
+              </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
+                            <h3>Fully Responsive</h3>
+                            <p class="lead mb-0">This calculator will look great on any device, no matter the size!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
+                            <h3>Bootstrap 5 Ready</h3>
+                            <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
+                            <h3>Easy to Use</h3>
+                            <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- Call to Action-->
+        <section class="call-to-action text-white text-center" id="signup">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <h2 class="mb-4">Want To Check Another Car?</h2>
+                        
+                                <form class="form-subscribe" id="jdmForm" action="price.php" method="post">
+                                <!-- Email address input-->
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Vehicle Price (YEN)</label>
+                                        <input class="form-control form-control-lg" name="vehiclePriceB3" title="vehiclePrice" id="vehiclePrice" type="text" placeholder="500000" required />
+                                    </div>
+                                     <div class="col-lg-4">
+                                        <label>Vehicle Type</label>
+                                         <select id="vehicleType" class="form-control form-control-lg" name="vehicleType">
+                                          <option value="Car">Passenger Car</option>
+                                          <option value="Truck">Truck</option>
+                                         </select>
+                                    </div>
+                                     <div class="col-lg-4">
+                                        <label>Desired Port of Entry</label>
+                                        <select id="portEntry" class="form-control form-control-lg" name="portEntry">
+                                          <option value="Savannah">Savannah</option>
+                                          <option value="Newark">Newark</option>
+                                          <option value="Baltimore">Baltimore</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="col-lg-12"><button class="btn btn-primary btn-lg" id="submitButton" type="submit" width="100%">Submit</button></div>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+   <?php include "includes/footer.inc.php"; ?>
