@@ -11,19 +11,19 @@
                                 <!-- Email address input-->
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <label>Vehicle Price (YEN)</label>
+                                        <label for="vehiclePrice">Vehicle Price (YEN)</label>
                                         <input class="form-control form-control-lg" name="vehiclePriceB3" title="vehiclePrice" id="vehiclePrice" type="text" placeholder="500000" required />
                                     </div>
                                      <div class="col-lg-4">
-                                        <label>Vehicle Type</label>
-                                         <select id="vehicleType" class="form-control form-control-lg" name="vehicleType">
+                                        <label for="vehicleType">Vehicle Type</label>
+                                         <select id="vehicleType" class="form-control form-control-lg form-select" name="vehicleType">
                                           <option value="Car">Passenger Car</option>
                                           <option value="Truck">Truck</option>
                                          </select>
                                     </div>
                                      <div class="col-lg-4">
-                                        <label>Desired Port of Entry</label>
-                                        <select id="portEntry" class="form-control form-control-lg" name="portEntry">
+                                        <label for="portEntry">Desired Port of Entry</label>
+                                        <select id="portEntry" class="form-control form-control-lg form-select" name="portEntry">
                                           <option value="Savannah">Savannah</option>
                                           <option value="Newark">Newark</option>
                                           <option value="Baltimore">Baltimore</option>

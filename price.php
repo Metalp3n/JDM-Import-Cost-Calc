@@ -2,7 +2,6 @@
 include "includes/header.inc.php";
 
 ?>
-
         <header class="masthead">
             <div class="container position-relative">
                 <div class="row justify-content-center">
@@ -20,13 +19,16 @@ include "includes/header.inc.php";
 
 
 
-// Get Submitted Variables
+// Get Submitted Variables & Sanitize
 $vehiclePriceB3YEN = $_POST["vehiclePriceB3"];
+$vehiclePriceB3YEN = filter_var($vehiclePriceB3YEN, FILTER_SANITIZE_STRING);
 $vehicleType = $_POST["vehicleType"];
+$vehicleType = filter_var($vehicleType, FILTER_SANITIZE_STRING);
 $portofEntry = $_POST["portEntry"];
+$portofEntry = filter_var($portofEntry, FILTER_SANITIZE_STRING);
 
 // Get Vehicle Price & convert
-$vehiclePriceB3USD =  convertCurrency($vehiclePriceB3YEN, 'JPY', 'USD');
+$vehiclePriceB3USD =  convertCurrency($vehiclePriceB3YEN, 'JPY', $currency);
 //...
 //..
 //.

@@ -14,7 +14,7 @@ $steamshipCharge = "57.23,173.15,157.65";
 // Set The Profit Per Car
 $profits = "1000";
 
-// Set Your Default Currency Using THe 3 Digit Currency Code
+// Set Your Default Currency Using The 3 Digit Currency Code
 $currency = "USD";
 
 
