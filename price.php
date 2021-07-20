@@ -1,5 +1,6 @@
-<?php
-include "includes/header.inc.php";
+<?php 
+include "includes/config.inc.php";
+include "includes/header.inc.php"; 
 
 // Get Submitted Variables
 $vehiclePriceB3YEN = $_POST["vehiclePriceB3"];

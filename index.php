@@ -1,4 +1,7 @@
-<?php include "includes/header.inc.php"; ?>
+<?php 
+include "includes/config.inc.php";
+include "includes/header.inc.php"; 
+?>
         <header class="masthead">
             <div class="container position-relative">
                 <div class="row justify-content-center">
