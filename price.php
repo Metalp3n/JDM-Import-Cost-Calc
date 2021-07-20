@@ -1,25 +1,6 @@
 <?php
 include "includes/header.inc.php";
 
-?>
-
-        <header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center text-white">
-                            <!-- Page heading-->
-                            <h1 class="mb-5">Total Import Cost Breakdown</h1>
-                            
-                           
-                            <div class="container totalCost">
-  <div class="row">
-    <div class="col-md-12">
-      
-            <?php
-
-
-
 // Get Submitted Variables
 $vehiclePriceB3YEN = $_POST["vehiclePriceB3"];
 $vehicleType = $_POST["vehicleType"];
@@ -27,25 +8,17 @@ $portofEntry = $_POST["portEntry"];
 
 // Get Vehicle Price & convert
 $vehiclePriceB3USD =  convertCurrency($vehiclePriceB3YEN, 'JPY', 'USD');
-//...
-//..
-//.
 
-//Setup Basic Pricing Variables
 //Auction Fees Calculation
 $auctionFeesYEN = $vehiclePriceB3YEN*0.05;
 $auctionFeesYEN = $auctionFeesYEN + 70000;
 if ($auctionFeesYEN < 80000) {
   $auctionFeesYEN = "80000";
 }
-//Setup Auction Fees in YEN & USD
 $auctionFeesYEN = roundUpToNearestThousand($auctionFeesYEN);
 $auctionFeesUSD = convertCurrency($auctionFeesYEN, 'JPY', 'USD');
-//...
-//..
-//.
 
-//Remaining Basic Pricing Variables & Conversions
+//Remaining Static Import Costs Pricing Variables & Conversions
 $inlandTransportYEN = "38000";
 $inlandTransportUSD = convertCurrency($inlandTransportYEN, 'JPY', 'USD');
 $preshipmentWashYEN = "5000";
@@ -54,6 +27,13 @@ $roroShippingYEN = "98000";
 $roroShippingUSD = convertCurrency($roroShippingYEN, 'JPY', 'USD');
 $usTitleUSD = "275";
 $usTitleYEN = convertCurrency($usTitleUSD, 'USD', 'JPY');
+$customsDutyUSD = "240";
+$customsDutyYEN = convertCurrency($customsDutyUSD, 'USD', 'JPY');
+
+//THIS IS WHERE YOU MAKE MONEY
+$profitsUSD = "1000"; // SET PROFIT HERE IN USD
+$profitsYEN= convertCurrency($profitsUSD, 'USD', 'JPY');
+
 //Customs Filing Formmula
 $customsFilingUSD = $inlandTransportUSD + $preshipmentWashUSD + $roroShippingUSD + $vehiclePriceB3USD + $auctionFeesUSD;
 
@@ -63,14 +43,8 @@ if ($vehicleType == "Truck") {
   $customsFilingUSD = $customsFilingUSD * 0.029714;
 }
 $customsFilingYEN = convertCurrency($customsFilingUSD, 'USD', 'JPY');
-//Remaining Basic Pricing Variables & Conversions
-$customsDutyUSD = "240";
-$customsDutyYEN = convertCurrency($customsDutyUSD, 'USD', 'JPY');
 
-//Calculate Port Charge
-//...
-//..
-//.
+//Calculate Port Charge & Steamship Charge
 if ($portofEntry == "Savannah") {
   $steamshipChargeUSD = "57.23";
 } elseif ($portofEntry == "Newark") {
@@ -78,9 +52,7 @@ if ($portofEntry == "Savannah") {
 } else {
   $steamshipChargeUSD = "157.65";
 }
-
 $steamshipChargeYEN = convertCurrency($steamshipChargeUSD, 'USD', 'JPY');
-
 
 $portofEntry = $_POST["portEntry"];
 if ($portofEntry == "Savannah") {
@@ -94,20 +66,12 @@ if ($portofEntry == "Savannah") {
 $portChargeYEN = convertCurrency($portChargeUSD, 'USD', 'JPY');
 
 
-//THIS IS WHERE YOU MAKE MONEY
-//SET PROFIT IN USD
-$jdmImporterUSD = "1000";
-$jdmImporterYEN= convertCurrency($jdmImporterUSD, 'USD', 'JPY');
-
 // FINAL TOTAL CALCULATION
 $total = $vehiclePriceB3USD + $auctionFeesUSD + $inlandTransportUSD + $preshipmentWashUSD + $roroShippingUSD + $usTitleUSD + $customsFilingUSD + $customsDutyUSD + $portChargeUSD + steamshipChargeUSD + $jdmImporterUSD;
 // CONVERT TOTAL TO YEN
 $totalYEN = convertCurrency($total, 'USD', 'JPY');
 
 //PREPARE EVERYTHING IN PRETTY DISPLAYS
-//...
-//..
-//.
 $vehiclePriceB3USD = money_format('$%i', $vehiclePriceB3USD);
 $vehiclePriceB3YEN = money_format('¥%i', $vehiclePriceB3YEN);
 $auctionFeesUSD = money_format('$%i', $auctionFeesUSD);
@@ -128,17 +92,24 @@ $steamshipChargeUSD = money_format('$%i', $steamshipChargeUSD);
 $steamshipChargeYEN = money_format('¥%i', $steamshipChargeYEN);
 $usTitleUSD = money_format('$%i', $usTitleUSD);
 $usTitleYEN = money_format('¥%i', $usTitleYEN);
-$jdmImporterUSD = money_format('$%i', $jdmImporterUSD);
-$jdmImporterYEN = money_format('¥%i', $jdmImporterYEN);
+$jdmImporterUSD = money_format('$%i', $profitsUSD);
+$jdmImporterYEN = money_format('¥%i', $profitsYEN);
 $total = money_format('$%i', $total);
 $totalYEN = money_format('¥%i', $totalYEN);
-
-
-//START DISPLAY
-//...
-//..
-//.
 ?>
+
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">Total Import Cost: <em><?=$total;?></em></h1>
+                            
+                           
+                            <div class="container totalCost">
+  <div class="row">
+    <div class="col-md-12">
 
 <table class="table table-hover">
 <tbody>
