@@ -9,7 +9,7 @@ include "includes/header.inc.php";
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5">Total Cost Breakdown</h1>
+                            <h1 class="mb-5">Total Import Cost Breakdown</h1>
                             
                            
                             <div class="container totalCost">
