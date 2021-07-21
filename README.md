@@ -5,5 +5,5 @@ This project initially came about as a side development for a friends JDM car im
 As I get more free time to clean things up, I will put together a proper README file.
 
 --
-Michael Boguslavskiy
+Michael Boguslavskiy 
 https://mboguslavskiy.us
