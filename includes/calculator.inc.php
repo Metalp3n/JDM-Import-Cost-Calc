@@ -12,19 +12,12 @@ $auctionFeesYEN = roundUpToNearestThousand($auctionFeesYEN);
 $auctionFeesUSD = convertCurrency($auctionFeesYEN, 'JPY', 'USD');
 
 //Remaining Static Import Costs Pricing Variables & Conversions
-$inlandTransportYEN = "38000";
 $inlandTransportUSD = convertCurrency($inlandTransportYEN, 'JPY', 'USD');
-$preshipmentWashYEN = "5000";
 $preshipmentWashUSD = convertCurrency($preshipmentWashYEN, 'JPY', 'USD');
-$roroShippingYEN = "98000";
 $roroShippingUSD = convertCurrency($roroShippingYEN, 'JPY', 'USD');
-$usTitleUSD = "275";
 $usTitleYEN = convertCurrency($usTitleUSD, 'USD', 'JPY');
-$customsDutyUSD = "240";
 $customsDutyYEN = convertCurrency($customsDutyUSD, 'USD', 'JPY');
-
-//THIS IS WHERE YOU MAKE MONEY
-$profitsUSD = $profits; // SET PROFIT HERE IN USD
+$profitsUSD = $profits; 
 $profitsYEN= convertCurrency($profitsUSD, 'USD', 'JPY');
 
 //Customs Filing Formmula

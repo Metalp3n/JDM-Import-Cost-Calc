@@ -17,6 +17,13 @@ $profits = "2500"; // SET PROFIT HERE IN USD
 // Set Your Default Currency Using THe 3 Digit Currency Code
 $currency = "USD";
 
+//Known Import Cost Variables. The inland transport, roro shipping, and preshipment wash are al charged to you in YEN, as such the values are entered in YEN to simplify things. For US titles and customs duty, these are charged to you in USD, and as such the values entered need to be in USD. 
+$inlandTransportYEN = "38000";
+$preshipmentWashYEN = "5000";
+$roroShippingYEN = "98000";
+$usTitleUSD = "275";
+$customsDutyUSD = "240";
+
 // Don't Touch This Include
 require_once "functions.inc.php";
 ?>
